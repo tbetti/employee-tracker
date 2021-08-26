@@ -1,0 +1,19 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "View, add, and edit departments and employee data.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tbetti/employee-tracker.git"
+  },
+  "author": "Tiana Bettinson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tbetti/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/tbetti/employee-tracker#readme"
+}
