@@ -1,3 +1,4 @@
+// Connect to MySql and employees_db
 const Sequelize = require('sequelize');
 require('dotenv').config('../.env');
 
