@@ -4,7 +4,7 @@ const questions = {
         type: "list",
         name: "options",
         message: "Select an option:",
-        choices: ["View all departments", "view all roles", "view all employees", "add a department", "add a role", "add an employee", "update an employee role"],
+        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role"],
     },
     addDepartment: {
         type: "input",
