@@ -1,11 +1,11 @@
 const inquirer = require('inquirer');
 const questions = require('./util/inquire_questions.js');
+const sequelize = require('./config/connection.js');
 
 // Prompt user for action
 function init() {
     inquirer.prompt(questions.options)
     .then((data) =>{
-        console.log(data);
         option(data)
     })
 }
@@ -46,8 +46,6 @@ function option(data) {
                 console.log(data);
             })
             break;
-        default:
-            console.log("Something went wrong");
     }
 }
 
