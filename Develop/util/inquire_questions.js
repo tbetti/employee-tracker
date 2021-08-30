@@ -1,4 +1,21 @@
-// Import departments, roles, employees
+const db = require('../config/connection');
+
+// Create arrays of departments, roles, and employees
+function getArray(table, column) {
+    const array = [];
+    db.query(`SELECT ${column} FROM ${table}`, (err, results) =>{
+        results = JSON.stringify(results);
+        results = JSON.parse(results);
+        results.forEach(element => {
+            if(table==='departments') array.push(element.department_name);
+            else if(table==='roles') array.push(element.title);
+            else if(table == 'employees') array.push(element.first_name);
+        });
+    })
+    return array;
+}
+
+// Prompt users for input
 const questions = {
     options: {
         type: "list",
@@ -46,7 +63,7 @@ const questions = {
             type: "list",
             name: "department",
             message: "Select this role's department: ",
-            choices: ["IT", "Finance"],
+            choices: getArray("departments", "department_name"),
         }
     ],
     addEmployee: [
@@ -72,7 +89,7 @@ const questions = {
             type: "list",
             name: "role",
             message: "Select employee's role: ",
-            choices: ["role1", "role2", "role3"],
+            choices: getArray("roles", "title"),
         }
     ],
     updateEmployeeRole: [
@@ -80,13 +97,13 @@ const questions = {
             type: "list",
             name: "employee",
             message: "Select which employee to update: ",
-            choices: ["employee1", "employee2", "employee3"],
+            choices: getArray("employees", "first_name"),
         },
         {
             type: "list",
             name: "role",
             message: "Select employee's role: ",
-            choices: ["role1", "role2", "role3"],
+            choices: getArray("roles", "title"),
         }
     ]
 }

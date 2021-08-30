@@ -1,5 +1,4 @@
 const db = require('../config/connection');
-const cTable = require('console.table');
 const util = require('util');
 db.query = util.promisify(db.query);
 class DB {
@@ -19,12 +18,10 @@ class DB {
         return db.query(`INSERT INTO roles SET ?`, data)
     }
     findId(name, table, column){
-        console.log(name);
-        console.log(table);
-        console.log(column);
         return db.query(`SELECT id FROM ${table} WHERE ${column}='${name}'`)
     }
 }
+
 // SELECT * FROM employees WHERE id=?, [gets filled in with number of person to delete/update]
 // Updates need body of info we're updating and number of person we're getting
 
