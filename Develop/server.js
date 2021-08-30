@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const questions = require('./util/inquire_questions.js');
-const option = require('./util/util.js');
+const option = require('./util/inquire_prompts.js');
 //const sequelize = require('./config/connection.js');
 const express = require('express');
 const app = express();
