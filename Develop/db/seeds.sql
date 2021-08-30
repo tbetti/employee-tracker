@@ -6,24 +6,18 @@ VALUES
     ("Sales")
 ;
 
-INSERT INTO roles (id, title, salary)
+INSERT INTO roles (title, salary, department_id)
 VALUES 
-    (1, "Relations Manager", "70000"),
-    (2, "Secretary", "40000"),
-    (3, "Designer", "75000"),
-    (4, "Salesperson", "60000")
+    ("Relations Manager", "70000", 4),
+    ("Secretary", "40000", 2),
+    ("Designer", "75000", 4),
+    ("Salesperson", "60000", 1)
 ;
 
-UPDATE roles
-SET id=LPAD(FLOOR(RAND() * 999999.99), 6, '0');
-
-INSERT INTO employees (id, first_name, last_name, manager_id)
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES 
-    (1, "Jen", "Barber", 1),
-    (2, "Charlie", "Smith", NULL),
-    (3, "Izzy", "Yazzie", NULL),
-    (4, "Nelly", "Jones", NULL)
+    ("Jen", "Barber", 1, NULL),
+    ("Charlie", "Smith", 2, NULL),
+    ("Izzy", "Yazzie", 3, NULL),
+    ("Nelly", "Jones", 4, NULL)
 ;
-
-UPDATE employees
-SET id=LPAD(FLOOR(RAND() * 999999.99), 6, '0');

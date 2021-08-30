@@ -14,7 +14,7 @@ const questions = {
     },
     addDepartment: {
         type: "input",
-        name: "newDepartment",
+        name: "department_name",
         message: "Enter the department name: ",
         validate: (answer) =>{
             if(answer != "") return true;
@@ -46,7 +46,7 @@ const questions = {
             type: "list",
             name: "department",
             message: "Select this role's department: ",
-            choices: ["departmentName1", "departmentName2"],
+            choices: ["IT", "Finance"],
         }
     ],
     addEmployee: [
