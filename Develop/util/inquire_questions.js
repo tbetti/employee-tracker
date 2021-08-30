@@ -1,33 +1,12 @@
 const db = require('../config/connection');
 
-// Create arrays of departments, roles, and employees
-function getArray(table, column) {
-    const array = [];
-    db.query(`SELECT ${column} FROM ${table}`, (err, results) =>{
-        results = JSON.stringify(results);
-        results = JSON.parse(results);
-        results.forEach(element => {
-            if(table==='departments') array.push(element.department_name);
-            else if(table==='roles') array.push(element.title);
-            else if(table == 'employees') array.push(element.first_name);
-        });
-    })
-    return array;
-}
-
 // Prompt users for input
 const questions = {
     options: {
         type: "list",
         name: "options",
         message: "Select an option:",
-        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role"],
-    },
-    finished: {
-        type: "list",
-        name: "finished",
-        message: "Would you like to choose another option?",
-        choices: ["Yes", "No"],
+        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "Quit"],
     },
     addDepartment: {
         type: "input",
@@ -106,6 +85,21 @@ const questions = {
             choices: getArray("roles", "title"),
         }
     ]
+}
+
+// Create arrays of current departments, roles, and employees
+function getArray(table, column) {
+    const array = [];
+    db.query(`SELECT ${column} FROM ${table}`, (err, results) =>{
+        results = JSON.stringify(results);
+        results = JSON.parse(results);
+        results.forEach(element => {
+            if(table==='departments') array.push(element.department_name);
+            else if(table==='roles') array.push(element.title);
+            else if(table == 'employees') array.push(element.first_name);
+        });
+    })
+    return array;
 }
 
 module.exports = questions;

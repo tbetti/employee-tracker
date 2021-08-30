@@ -1,6 +1,8 @@
 const db = require('../config/connection');
 const util = require('util');
 db.query = util.promisify(db.query);
+
+// Create MySQL commands based on user input
 class DB {
     viewDepartments(){
         return db.query('SELECT * FROM departments');
@@ -16,6 +18,9 @@ class DB {
     }
     addRole(data){
         return db.query(`INSERT INTO roles SET ?`, data)
+    }
+    addEmployee(data){
+        return db.query(`INSERT INTO employees SET ?`, data)
     }
     findId(name, table, column){
         return db.query(`SELECT id FROM ${table} WHERE ${column}='${name}'`)
