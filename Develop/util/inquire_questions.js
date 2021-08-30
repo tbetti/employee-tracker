@@ -6,7 +6,7 @@ const questions = {
         type: "list",
         name: "options",
         message: "Select an option:",
-        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "Quit"],
+        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "Delete department", "Quit"],
     },
     addDepartment: {
         type: "input",
@@ -83,6 +83,30 @@ const questions = {
             name: "role",
             message: "Select employee's role: ",
             choices: getArray("roles", "title"),
+        }
+    ],
+    deleteDepartment: [
+        {
+            type: "list",
+            name: "department_name",
+            message: "Choose which department you want to delete: ",
+            choices: getArray("departments", "department_name")
+        }
+    ],
+    deleteRole: [
+        {
+            type: "list",
+            name: "deleteRole",
+            message: "Choose which role you want to delete: ",
+            choices: getArray("roles", "title")
+        }
+    ],
+    deleteEmployee: [
+        {
+            type: "list",
+            name: "deleteEmployee",
+            message: "Choose which employee you want to delete: ",
+            choices: getArray("employees", "first_name")
         }
     ]
 }

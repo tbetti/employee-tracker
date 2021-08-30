@@ -17,19 +17,19 @@ function option(data) {
         // Print tables of departments, roles, and employees to console
         case 'View all departments':
             DB.viewDepartments().then(res => {
-                console.log('\n'+cTable.getTable(res));
+                console.log('\n' + cTable.getTable(res));
                 init();
             })
             break;
         case 'View all roles':
             DB.viewRoles().then(res => {
-                console.log('\n'+cTable.getTable(res));
+                console.log('\n' + cTable.getTable(res));
                 init();
             })
             break;
         case 'View all employees':
             DB.viewEmployees().then(res => {
-                console.log('\n'+cTable.getTable(res));
+                console.log('\n' + cTable.getTable(res));
                 init();
             });
             break;
@@ -54,18 +54,25 @@ function option(data) {
                     addEmployee(data);
                 })
             break;
+        // Update employee role
         case 'Update an employee role':
             inquirer.prompt(questions.updateEmployeeRole)
                 .then((data) => {
                     console.log(data);
                 })
             break;
+        // Delete department
+        case 'Delete department':
+            inquirer.prompt(questions.deleteDepartment)
+                .then(data => {
+                    deleteDepartment(data);
+                })
         case 'Quit':
             break;
     }
 }
 
-function addDepartment(data){
+function addDepartment(data) {
     DB.addDepartment({ department_name: data.department_name }).then(res => {
         if (res.affectedRows === 1) {
             console.log(`Successfully added ${data.department_name}`);
@@ -74,7 +81,17 @@ function addDepartment(data){
     });
 }
 
-function addRole(data){
+function deleteDepartment(data) {
+    DB.deleteDepartment(data.department_name).then(res => {
+        console.log(res);
+        if (res.affectedRows === 1) {
+            console.log(`Successfully deleted ${data.department_name}`);
+        }
+        init();
+    });
+}
+
+function addRole(data) {
     // Connect role to department by finding the department's id
     DB.findId(data.department, 'departments', 'department_name').then(res => {
         DB.addRole({
@@ -90,7 +107,7 @@ function addRole(data){
     })
 }
 
-function addEmployee(data){
+function addEmployee(data) {
     // Connect employee to role by finding role's id
     DB.findId(data.role, 'roles', 'title').then(res => {
         DB.addEmployee({

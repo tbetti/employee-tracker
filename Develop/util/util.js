@@ -22,6 +22,18 @@ class DB {
     addEmployee(data){
         return db.query(`INSERT INTO employees SET ?`, data)
     }
+    updateEmployee(data){
+        return db.query(`UPDATE employees SET ? WHERE id=?`)
+    }
+    deleteDepartment(data){
+        return db.query(`DELETE FROM departments WHERE department_name=?`, data)
+    }
+    deleteRole(data){
+        return db.query(`DELETE FROM roles WHERE id=?`, data)
+    }
+    deleteEmployees(data){
+        return db.query(`DELETE FROM employeees WHERE id=?`, data)
+    }
     findId(name, table, column){
         return db.query(`SELECT id FROM ${table} WHERE ${column}='${name}'`)
     }
