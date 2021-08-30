@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const questions = require('./util/inquire_questions.js');
 const { printTable } = require('console-table-printer');
 const DB = require('./util/util');
+const { addRole, addEmployee } = require('./util/util');
 
 // Prompt user for action
 function init() {
@@ -40,50 +41,21 @@ function option(data) {
         case 'Add a department':
             inquirer.prompt(questions.addDepartment)
                 .then((data) => {
-                    DB.addDepartment({ department_name: data.department_name }).then(res => {
-                        if (res.affectedRows === 1) {
-                            console.log(`Successfully added ${data.department_name}`);
-                        }
-                        init();
-                    });
+                    addDepartment(data);
                 })
             break;
         // Add a role
         case 'Add a role':
             inquirer.prompt(questions.addRole)
                 .then((data) => {
-                    // Connect role to department by finding the department's id
-                    DB.findId(data.department, 'departments', 'department_name').then(res => {
-                        DB.addRole({
-                            title: data.newRole,
-                            salary: data.salary,
-                            department_id: res[0].id
-                        }).then(res => {
-                            if (res.affectedRows === 1) {
-                                console.log(`Successfully added ${data.newRole} to ${data.department}`);
-                            }
-                            init();
-                        });
-                    })
+                    addRole(data);
                 })
             break;
         // Add an employee
         case 'Add an employee':
             inquirer.prompt(questions.addEmployee)
                 .then((data) => {
-                    // Connect employee to role by finding role's id
-                    DB.findId(data.role, 'roles', 'title').then(res => {
-                        DB.addEmployee({
-                            first_name: data.firstName,
-                            last_name: data.lastName,
-                            role_id: res[0].id
-                        }).then(res => {
-                            if (res.affectedRows === 1) {
-                                console.log(`Successfully added ${data.firstName} to ${data.role}`);
-                            }
-                            init();
-                        });
-                    })
+                    addEmployee(data);
                 })
             break;
         case 'Update an employee role':
@@ -95,6 +67,47 @@ function option(data) {
         case 'Quit':
             break;
     }
+}
+
+function addDepartment(data){
+    DB.addDepartment({ department_name: data.department_name }).then(res => {
+        if (res.affectedRows === 1) {
+            console.log(`Successfully added ${data.department_name}`);
+        }
+        init();
+    });
+}
+
+function addRole(data){
+    // Connect role to department by finding the department's id
+    DB.findId(data.department, 'departments', 'department_name').then(res => {
+        DB.addRole({
+            title: data.newRole,
+            salary: data.salary,
+            department_id: res[0].id
+        }).then(res => {
+            if (res.affectedRows === 1) {
+                console.log(`Successfully added ${data.newRole} to ${data.department}`);
+            }
+            init();
+        });
+    })
+}
+
+function addEmployee(data){
+    // Connect employee to role by finding role's id
+    DB.findId(data.role, 'roles', 'title').then(res => {
+        DB.addEmployee({
+            first_name: data.firstName,
+            last_name: data.lastName,
+            role_id: res[0].id
+        }).then(res => {
+            if (res.affectedRows === 1) {
+                console.log(`Successfully added ${data.firstName} to ${data.role}`);
+            }
+            init();
+        });
+    })
 }
 
 init();
