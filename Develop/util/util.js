@@ -29,7 +29,7 @@ class DB {
         return db.query(`DELETE FROM departments WHERE department_name=?`, data)
     }
     deleteRole(data){
-        return db.query(`DELETE FROM roles WHERE id=?`, data)
+        return db.query(`DELETE FROM roles WHERE title=?`, data)
     }
     deleteEmployees(data){
         return db.query(`DELETE FROM employeees WHERE id=?`, data)

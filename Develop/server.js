@@ -67,6 +67,11 @@ function option(data) {
                 .then(data => {
                     deleteDepartment(data);
                 })
+        case 'Delete role':
+            inquirer.prompt(questions.deleteRole)
+                .then(data =>{
+                    deleteRole(data);
+                })
         case 'Quit':
             break;
     }
@@ -105,6 +110,16 @@ function addRole(data) {
             init();
         });
     })
+}
+
+function deleteRole(data) {
+    DB.deleteRole(data.title).then(res => {
+        console.log(res);
+        if (res.affectedRows === 1) {
+            console.log(`Successfully deleted ${data.title}`);
+        }
+        init();
+    });
 }
 
 function addEmployee(data) {
