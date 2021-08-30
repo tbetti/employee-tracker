@@ -67,21 +67,25 @@ function option(data) {
                 .then(data => {
                     deleteDepartment(data);
                 })
+        // Delete role
         case 'Delete role':
             inquirer.prompt(questions.deleteRole)
                 .then(data =>{
                     deleteRole(data);
                 })
+        // Delete employee
         case 'Delete employee':
             inquirer.prompt(questions.deleteEmployee)
                 .then(data=>{
                     deleteEmployee(data);
                 })
+        // Quit program
         case 'Quit':
             break;
     }
 }
 
+// Add a department
 function addDepartment(data) {
     DB.addDepartment({ department_name: data.department_name }).then(res => {
         if (res.affectedRows === 1) {
@@ -91,6 +95,7 @@ function addDepartment(data) {
     });
 }
 
+// Delete a department
 function deleteDepartment(data) {
     DB.deleteDepartment(data.department_name).then(res => {
         console.log(res);
@@ -101,6 +106,7 @@ function deleteDepartment(data) {
     });
 }
 
+// Add a role
 function addRole(data) {
     // Connect role to department by finding the department's id
     DB.findId(data.department, 'departments', 'department_name').then(res => {
@@ -117,9 +123,9 @@ function addRole(data) {
     })
 }
 
+// Delete a role
 function deleteRole(data) {
     DB.deleteRole(data.title).then(res => {
-        console.log(res);
         if (res.affectedRows === 1) {
             console.log(`Successfully deleted ${data.title}`);
         }
@@ -127,6 +133,7 @@ function deleteRole(data) {
     });
 }
 
+// Add an employee
 function addEmployee(data) {
     // Connect employee to role by finding role's id
     DB.findId(data.role, 'roles', 'title').then(res => {
@@ -143,9 +150,9 @@ function addEmployee(data) {
     })
 }
 
+// Delete an employee
 function deleteEmployee(data){
     DB.deleteEmployee(data.employeeName).then(res => {
-        console.log(res);
         if (res.affectedRows === 1) {
             console.log(`Successfully deleted ${data.employeeName}`);
         }
