@@ -72,6 +72,11 @@ function option(data) {
                 .then(data =>{
                     deleteRole(data);
                 })
+        case 'Delete employee':
+            inquirer.prompt(questions.deleteEmployee)
+                .then(data=>{
+                    deleteEmployee(data);
+                })
         case 'Quit':
             break;
     }
@@ -136,6 +141,16 @@ function addEmployee(data) {
             init();
         });
     })
+}
+
+function deleteEmployee(data){
+    DB.deleteEmployee(data.employeeName).then(res => {
+        console.log(res);
+        if (res.affectedRows === 1) {
+            console.log(`Successfully deleted ${data.employeeName}`);
+        }
+        init();
+    });
 }
 
 init();

@@ -31,8 +31,8 @@ class DB {
     deleteRole(data){
         return db.query(`DELETE FROM roles WHERE title=?`, data)
     }
-    deleteEmployees(data){
-        return db.query(`DELETE FROM employeees WHERE id=?`, data)
+    deleteEmployee(data){
+        return db.query(`DELETE FROM employees WHERE first_name=?`, data)
     }
     findId(name, table, column){
         return db.query(`SELECT id FROM ${table} WHERE ${column}='${name}'`)
