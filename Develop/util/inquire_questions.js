@@ -6,6 +6,12 @@ const questions = {
         message: "Select an option:",
         choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role"],
     },
+    finished: {
+        type: "list",
+        name: "finished",
+        message: "Would you like to choose another option?",
+        choices: ["Yes", "No"],
+    },
     addDepartment: {
         type: "input",
         name: "newDepartment",
