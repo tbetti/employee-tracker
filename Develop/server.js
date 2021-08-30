@@ -1,8 +1,7 @@
 const inquirer = require('inquirer');
 const questions = require('./util/inquire_questions.js');
-const { printTable } = require('console-table-printer');
+const cTable = require('console.table');
 const DB = require('./util/util');
-const { addRole, addEmployee } = require('./util/util');
 
 // Prompt user for action
 function init() {
@@ -18,22 +17,19 @@ function option(data) {
         // Print tables of departments, roles, and employees to console
         case 'View all departments':
             DB.viewDepartments().then(res => {
-                console.log('\n')
-                printTable(res);
+                console.log('\n'+cTable.getTable(res));
                 init();
             })
             break;
         case 'View all roles':
             DB.viewRoles().then(res => {
-                console.log('\n')
-                printTable(res);
+                console.log('\n'+cTable.getTable(res));
                 init();
             })
             break;
         case 'View all employees':
             DB.viewEmployees().then(res => {
-                console.log('\n')
-                printTable(res);
+                console.log('\n'+cTable.getTable(res));
                 init();
             });
             break;
