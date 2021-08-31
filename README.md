@@ -17,7 +17,7 @@
   Ensure you have Node.js downloaded on your computer. Download the Develop file and open in your source code editor.  Open a new terminal connected to the Develop folder.  Run npm install to ensure you have all dependencies installed and ready to use. 
 
   ## Usage
-  Once you have all necessary folders and packages installed, type node server.js.  Answer the questions that follow. You will first be prompted to view, add, or delete data. After selecting an option, you will be prompted for more information about how you want to interact with the employees database. To quit the application, select “Quit” when prompted to select an option. Then hit Cmd + C.
+  Once you have all necessary folders and packages installed, type node server.js.  Answer the questions that follow. You will first be prompted to view, add, or delete data. After selecting an option, you will be prompted for more information about how you want to interact with the employees database. To quit the application, select “Quit” when prompted to select an option. Then hit Cmd + C.  See [demo video](https://drive.google.com/file/d/1rVnCfqdrgjKb9Phc5zHeN47h7dJyUyQG/view?usp=sharing) here.
 
   ## License
   This project is registered under the [MIT License](/LICENSE)
