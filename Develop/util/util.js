@@ -8,10 +8,10 @@ class DB {
         return db.query('SELECT * FROM departments');
     }
     viewRoles(){
-        return db.query('SELECT * FROM roles')
+        return db.query('SELECT * FROM roles r JOIN departments d ON r.department_id=d.id')
     }
     viewEmployees(){
-        return db.query('SELECT * FROM employees')
+        return db.query('SELECT * FROM employees e JOIN roles r ON e.role_id=r.id')
     }
     addDepartment(data){
         return db.query(`INSERT INTO departments SET ?`, data) // expect object with all columns
@@ -23,7 +23,7 @@ class DB {
         return db.query(`INSERT INTO employees SET ?`, data)
     }
     updateEmployee(data){
-        return db.query(`UPDATE employees SET ? WHERE id=?`)
+        return db.query(`UPDATE employees SET role_id=? WHERE first_name=?`, data)
     }
     deleteDepartment(data){
         return db.query(`DELETE FROM departments WHERE department_name=?`, data)

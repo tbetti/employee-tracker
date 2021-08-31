@@ -59,6 +59,7 @@ function option(data) {
             inquirer.prompt(questions.updateEmployeeRole)
                 .then((data) => {
                     console.log(data);
+                    updateEmployee(data);
                 })
             break;
         // Delete department
@@ -67,18 +68,21 @@ function option(data) {
                 .then(data => {
                     deleteDepartment(data);
                 })
+            break;
         // Delete role
         case 'Delete role':
             inquirer.prompt(questions.deleteRole)
                 .then(data =>{
                     deleteRole(data);
                 })
+            break;
         // Delete employee
         case 'Delete employee':
             inquirer.prompt(questions.deleteEmployee)
                 .then(data=>{
                     deleteEmployee(data);
                 })
+            break;
         // Quit program
         case 'Quit':
             break;
@@ -147,6 +151,18 @@ function addEmployee(data) {
             }
             init();
         });
+    })
+}
+
+// Update an employee
+function updateEmployee(data){
+    DB.findId(data.role, 'roles', 'title').then(res =>{
+        DB.updateEmployee([res[0].id, data.employee]).then(res=>{
+            if (res.affectedRows === 1) {
+                console.log(`Successfully updated ${data.employee}`);
+            }
+            init();
+        })
     })
 }
 
